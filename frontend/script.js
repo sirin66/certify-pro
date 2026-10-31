@@ -4,7 +4,9 @@
  */
 
 // If opened via VS Code Live Server (port 5500/5501) or file://, direct requests to Flask backend at port 5000
-const API_BASE = (window.location.port === "5000") ? "" : "http://127.0.0.1:5000";
+const isBackendDirect = window.location.port === "5000";
+const targetHost = (window.location.hostname === "localhost") ? "localhost" : "127.0.0.1";
+const API_BASE = isBackendDirect ? "" : `http://${targetHost}:5000`;
 
 // Application State
 const appState = {
