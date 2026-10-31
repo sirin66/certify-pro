@@ -1,0 +1,10 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+service_account.json
+backend/service_account.json
+backend/uploads/*
+!backend/uploads/.gitkeep
+backend/generated_output/*
+.vscode/

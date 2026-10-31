@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CertifyPro — Bulk Certificate Generator & Drive Uploader</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-content">
+      <div class="logo">
+        <span class="logo-icon">🎓</span>
+        <h1>CertifyPro</h1>
+      </div>
+      <p class="tagline">Generate personalized certificates from spreadsheets and upload straight to Google Drive.</p>
+    </div>
+  </header>
+
+  <!-- Step Tracker -->
+  <nav class="stepper-wrapper">
+    <div class="stepper">
+      <div class="step-node active" id="node1">
+        <div class="step-circle">1</div>
+        <span>Data & Event</span>
+      </div>
+      <div class="step-divider"></div>
+      <div class="step-node" id="node2">
+        <div class="step-circle">2</div>
+        <span>Template</span>
+      </div>
+      <div class="step-divider"></div>
+      <div class="step-node" id="node3">
+        <div class="step-circle">3</div>
+        <span>Generate</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Wizard Container -->
+  <main class="wizard-container">
+
+    <!-- STEP 1: CSV / Drive Link Input & Event Setup -->
+    <section class="card-step" id="step1">
+      <div class="card-title-group">
+        <span class="step-tag">Step 1</span>
+        <h2>Connect Spreadsheet & Set Event</h2>
+        <p>Paste your Google Sheet or Google Forms response sheet link.</p>
+      </div>
+
+      <div class="form-group">
+        <label for="csvUrl">Google Sheet / Forms Response Link</label>
+        <div class="input-action-row">
+          <input
+            type="url"
+            id="csvUrl"
+            placeholder="https://docs.google.com/spreadsheets/d/1YEXvNiSsbleRe.../edit?usp=sharing"
+            autocomplete="off"
+          />
+          <button class="btn btn-outline" id="previewBtn">
+            <span>👁️</span> Load & Preview
+          </button>
+        </div>
+        <small class="hint">
+          Works with Google Forms response sheets, Google Drive CSV links, or public URLs.
+        </small>
+      </div>
+
+      <!-- Column Selector & Event Name Row -->
+      <div class="config-grid">
+        <div class="form-group">
+          <label for="nameColumnSelect">Student Name Column</label>
+          <select id="nameColumnSelect" class="form-select">
+            <option value="">Auto-Detecting on Load...</option>
+          </select>
+          <small class="hint">Automatically detected from your spreadsheet headers.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="eventNameInput">Event / Course / Workshop Name</label>
+          <input
+            type="text"
+            id="eventNameInput"
+            placeholder="e.g., National Web Development Workshop 2025"
+            value="National Workshop 2025"
+          />
+          <small class="hint">This text will be printed on every certificate.</small>
+        </div>
+      </div>
+
+      <!-- Preview Table Container -->
+      <div class="table-preview-card hidden" id="previewCard">
+        <div class="table-preview-header">
+          <span id="previewCount">0 students detected</span>
+          <span class="badge">Preview (First 10 students)</span>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 70px;">#</th>
+                <th>Student / Participant Name</th>
+              </tr>
+            </thead>
+            <tbody id="previewBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card-nav">
+        <button class="btn btn-primary" id="btnNext1" disabled>
+          Continue to Step 2 &rarr;
+        </button>
+      </div>
+    </section>
+
+    <!-- STEP 2: Choose or Upload Template -->
+    <section class="card-step hidden" id="step2">
+      <div class="card-title-group">
+        <span class="step-tag">Step 2</span>
+        <h2>Select Certificate Template</h2>
+        <p>Pick one of the built-in layouts or upload your own blank certificate background.</p>
+      </div>
+
+      <div class="templates-grid">
+        <!-- 1. Professional -->
+        <div class="template-box selected" data-template="professional">
+          <div class="tmpl-canvas bg-navy">
+            <div class="tmpl-inner-border">
+              <span class="mini-title">CERTIFICATE</span>
+              <span class="mini-name">Student Name</span>
+              <span class="mini-event preview-event-text">Event Name</span>
+            </div>
+          </div>
+          <div class="tmpl-details">
+            <h3>Professional</h3>
+            <p>Navy & Gold corporate theme</p>
+          </div>
+        </div>
+
+        <!-- 2. Creative -->
+        <div class="template-box" data-template="creative">
+          <div class="tmpl-canvas bg-creative">
+            <div class="tmpl-inner-border-creative">
+              <span class="mini-title">EXCELLENCE</span>
+              <span class="mini-name">Student Name</span>
+              <span class="mini-event preview-event-text">Event Name</span>
+            </div>
+          </div>
+          <div class="tmpl-details">
+            <h3>Creative</h3>
+            <p>Vibrant violet & gradient flair</p>
+          </div>
+        </div>
+
+        <!-- 3. Minimalist -->
+        <div class="template-box" data-template="minimalist">
+          <div class="tmpl-canvas bg-minimalist">
+            <div class="tmpl-inner-border-minimal">
+              <span class="mini-title dark-text">COMPLETION</span>
+              <span class="mini-name dark-text">Student Name</span>
+              <span class="mini-event dark-text preview-event-text">Event Name</span>
+            </div>
+          </div>
+          <div class="tmpl-details">
+            <h3>Minimalist</h3>
+            <p>Emerald & ivory simplicity</p>
+          </div>
+        </div>
+
+        <!-- 4. Custom Upload -->
+        <div class="template-box" id="customBox" data-template="custom">
+          <div class="tmpl-canvas bg-custom" id="customCanvasPreview">
+            <div class="custom-prompt">
+              <span class="upload-icon">📁</span>
+              <span id="customCanvasStatus">Upload Certificate (.png/.jpg)</span>
+            </div>
+          </div>
+          <div class="tmpl-details">
+            <h3>Custom Template</h3>
+            <p id="customLabelDesc">Upload your own certificate background</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hidden file input for custom template upload -->
+      <input type="file" id="customFileInput" accept="image/png, image/jpeg, image/jpg, image/webp" style="display: none;" />
+
+      <!-- Custom Template Fine-Tuning Controls (Shown only when Custom is chosen) -->
+      <div class="custom-controls-card hidden" id="customControlsCard">
+        <h4>🎨 Custom Template Options</h4>
+        <div class="custom-options-row">
+          <div class="option-item">
+            <label for="customTextColor">Student Name Color:</label>
+            <select id="customTextColor" class="form-select">
+              <option value="#111827">Dark Slate (#111827)</option>
+              <option value="#0d1b3e">Deep Navy (#0d1b3e)</option>
+              <option value="#ffffff">Pure White (#ffffff)</option>
+              <option value="#d4af37">Gold (#d4af37)</option>
+            </select>
+          </div>
+
+          <div class="option-item">
+            <label for="customVerticalPosition">Name Vertical Position:</label>
+            <select id="customVerticalPosition" class="form-select">
+              <option value="0.48">Center (Default - 48%)</option>
+              <option value="0.42">Higher Up (42%)</option>
+              <option value="0.54">Lower Down (54%)</option>
+              <option value="0.60">Bottom Third (60%)</option>
+            </select>
+          </div>
+
+          <div class="option-item">
+            <label for="customOnlyName">Text to Print:</label>
+            <select id="customOnlyName" class="form-select">
+              <option value="true">Only Student Name (Recommended)</option>
+              <option value="false">Student Name + Event Subtext</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-nav">
+        <button class="btn btn-outline" id="btnBack2">&larr; Back</button>
+        <button class="btn btn-primary" id="btnNext2">Continue to Step 3 &rarr;</button>
+      </div>
+    </section>
+
+    <!-- STEP 3: Google Drive & Generation Options -->
+    <section class="card-step hidden" id="step3">
+      <div class="card-title-group">
+        <span class="step-tag">Step 3</span>
+        <h2>Output & Google Drive Destination</h2>
+        <p>Upload directly to Google Drive or download all certificates as a ZIP package.</p>
+      </div>
+
+      <!-- Google Cloud Service Account Status Box -->
+      <div class="sa-status-card" id="saStatusCard">
+        <div class="sa-status-header">
+          <div class="sa-badge" id="saBadge">Checking Google Drive Service Account...</div>
+          <button class="btn btn-outline btn-sm" id="btnUploadKey">Upload Key (.json)</button>
+          <input type="file" id="serviceAccountFileInput" accept=".json" style="display: none;" />
+        </div>
+        <p class="sa-info-text" id="saInfoText">Checking credentials status...</p>
+      </div>
+
+      <div class="config-grid" style="margin-top: 1.2rem;">
+        <div class="form-group">
+          <label for="folderId">Google Drive Folder ID (or Full URL)</label>
+          <input
+            type="text"
+            id="folderId"
+            placeholder="e.g., 1y7V-aBcDefGhIjKlMnOpQrStUvWxYz"
+          />
+          <small class="hint">
+            Open the destination folder in Google Drive &rarr; copy the ID from the URL.
+          </small>
+        </div>
+
+        <div class="summary-card">
+          <h4>Batch Summary</h4>
+          <div class="summary-line">
+            <span>Event:</span>
+            <strong id="sumEvent">National Workshop 2025</strong>
+          </div>
+          <div class="summary-line">
+            <span>Template:</span>
+            <strong id="sumTemplate">Professional</strong>
+          </div>
+          <div class="summary-line">
+            <span>Total Certificates:</span>
+            <strong id="sumCount">0</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Generation Action Buttons -->
+      <div class="action-buttons-group">
+        <button class="btn btn-large" id="btnGenerateDrive">
+          <span>☁️</span> Upload to Google Drive
+        </button>
+
+        <button class="btn btn-large btn-zip" id="btnGenerateZip">
+          <span>📦</span> Download All as ZIP
+        </button>
+      </div>
+
+      <!-- Spinner / Progress Indicator -->
+      <div class="loading-state hidden" id="loadingState">
+        <div class="loader-ring"></div>
+        <p id="loadingMsg">Generating certificates and processing...</p>
+        <small>Please wait while the certificates are rendered in high print quality (300 DPI).</small>
+      </div>
+
+      <!-- Output Results -->
+      <div class="results-card hidden" id="resultsCard">
+        <div class="results-summary-row">
+          <div class="stat-pill success-pill">
+            <span class="stat-num" id="statUploaded">0</span>
+            <span class="stat-lbl" id="statLbl">Processed</span>
+          </div>
+          <div class="stat-pill error-pill">
+            <span class="stat-num" id="statFailed">0</span>
+            <span class="stat-lbl">Failed</span>
+          </div>
+        </div>
+
+        <div id="zipDownloadBanner" class="zip-banner hidden"></div>
+        <div class="links-scroll-list" id="linksList"></div>
+      </div>
+
+      <div class="card-nav">
+        <button class="btn btn-outline" id="btnBack3">&larr; Back</button>
+        <button class="btn btn-outline" id="btnReset">Start Over</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <p>Powered by Python + Google Drive API Client &bull; Built with clean vanilla JavaScript</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
