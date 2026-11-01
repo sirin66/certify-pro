@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,8 +8,11 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
 </head>
+
 <body>
 
   <!-- Header -->
@@ -56,12 +60,9 @@
       <div class="form-group">
         <label for="csvUrl">Google Sheet / Forms Response Link</label>
         <div class="input-action-row">
-          <input
-            type="url"
-            id="csvUrl"
+          <input type="url" id="csvUrl"
             placeholder="https://docs.google.com/spreadsheets/d/1YEXvNiSsbleRe.../edit?usp=sharing"
-            autocomplete="off"
-          />
+            autocomplete="off" />
           <button class="btn btn-outline" id="previewBtn">
             <span>👁️</span> Load & Preview
           </button>
@@ -83,12 +84,8 @@
 
         <div class="form-group">
           <label for="eventNameInput">Event / Course / Workshop Name</label>
-          <input
-            type="text"
-            id="eventNameInput"
-            placeholder="e.g., National Web Development Workshop 2025"
-            value="National Workshop 2025"
-          />
+          <input type="text" id="eventNameInput" placeholder="e.g., National Web Development Workshop 2025"
+            value="National Workshop 2025" />
           <small class="hint">This text will be printed on every certificate.</small>
         </div>
       </div>
@@ -189,7 +186,8 @@
       </div>
 
       <!-- Hidden file input for custom template upload -->
-      <input type="file" id="customFileInput" accept="image/png, image/jpeg, image/jpg, image/webp" style="display: none;" />
+      <input type="file" id="customFileInput" accept="image/png, image/jpeg, image/jpg, image/webp"
+        style="display: none;" />
 
       <!-- Custom Template Fine-Tuning Controls (Shown only when Custom is chosen) -->
       <div class="custom-controls-card hidden" id="customControlsCard">
@@ -252,11 +250,7 @@
       <div class="config-grid" style="margin-top: 1.2rem;">
         <div class="form-group">
           <label for="folderId">Google Drive Folder ID (or Full URL)</label>
-          <input
-            type="text"
-            id="folderId"
-            placeholder="e.g., 1y7V-aBcDefGhIjKlMnOpQrStUvWxYz"
-          />
+          <input type="text" id="folderId" placeholder="e.g., 1y7V-aBcDefGhIjKlMnOpQrStUvWxYz" />
           <small class="hint">
             Open the destination folder in Google Drive &rarr; copy the ID from the URL.
           </small>
@@ -328,4 +322,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>

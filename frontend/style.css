@@ -684,3 +684,145 @@ th {
   border-radius: var(--radius-sm);
   margin-bottom: 1rem;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Mobile Responsive Styles
+   ───────────────────────────────────────────────────────────── */
+
+@media (max-width: 600px) {
+  /* Header */
+  .app-header {
+    padding: 1.8rem 1rem 2.8rem;
+  }
+
+  .logo h1 {
+    font-size: 1.6rem;
+  }
+
+  .logo-icon {
+    font-size: 1.7rem;
+  }
+
+  .tagline {
+    font-size: 0.82rem;
+  }
+
+  /* Stepper */
+  .stepper {
+    gap: 0.4rem;
+  }
+
+  .step-node {
+    font-size: 0.62rem;
+  }
+
+  .step-circle {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+  }
+
+  /* Main card */
+  .card-step {
+    padding: 1.2rem 1rem;
+  }
+
+  .card-title-group h2 {
+    font-size: 1.15rem;
+  }
+
+  /* Input + button row: stack vertically on mobile */
+  .input-action-row {
+    flex-direction: column;
+  }
+
+  .input-action-row .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Config grid already has a media query, but enforce it here too */
+  .config-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Template grid: 2 columns on mobile */
+  .templates-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+
+  .tmpl-details h3 {
+    font-size: 0.78rem;
+  }
+
+  .tmpl-details p {
+    font-size: 0.65rem;
+  }
+
+  /* Custom options stack vertically */
+  .custom-options-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Action buttons: full width stack */
+  .action-buttons-group {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .btn-large {
+    font-size: 0.95rem;
+    padding: 0.85rem 1.2rem;
+    width: 100%;
+    justify-content: center;
+    border-radius: 12px;
+  }
+
+  /* Service account header: stack on small screens */
+  .sa-status-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .sa-status-header .btn-sm {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Result items: stack label and link */
+  .result-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  /* Card nav buttons */
+  .card-nav {
+    flex-direction: column-reverse;
+    gap: 0.5rem;
+  }
+
+  .card-nav .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Wizard container margin */
+  .wizard-container {
+    width: 96%;
+    margin-top: -1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  /* Very small phones: single-column template grid */
+  .templates-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .logo h1 {
+    font-size: 1.35rem;
+  }
+}
